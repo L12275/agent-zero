@@ -1,13 +1,13 @@
-name: Sync Docker Image
-on:
-push:
-branches: [main]
-jobs:
-sync:
-runs-on: ubuntu-latest
-steps:
+  name: Sync Docker Image
+  on:
+  push:
+  branches: [main]
+  jobs:
+  sync:
+  runs-on: ubuntu-latest
+  steps:
 - name: Checkout code
-uses: actions/checkout@v4
+  uses: actions/checkout@v4
 - name: Login to Aliyun
 uses: docker/login-action@v2
 with:
