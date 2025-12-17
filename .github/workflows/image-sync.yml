@@ -1,11 +1,25 @@
-  name: Test Workflow
-  on:
-  push:
-  branches:
-  - [main]
-  jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-    uses: actions/checkout@v4
+name: Sync Docker Image  # 工作流名称，无缩进（一级）
+on:                      # 触发条件，一级缩进
+  push:                  # 事件类型，二级缩进
+    branches: [main]     # 分支过滤，三级缩进（列表项无缩进）
+
+jobs:                    # 任务定义，一级缩进
+  sync:                  # 单个任务ID，二级缩进
+    runs-on: ubuntu-latest  # 运行环境，三级缩进（key: value）
+
+    steps:               # 任务步骤，三级缩进
+      - name: Checkout code  # 步骤名称，四级缩进（- 开头表示列表项，key: value）
+        uses: actions/checkout@v4  # 使用Action，四级缩进
+
+      - name: Login to Aliyun
+        uses: docker/login-action@v2
+        with:  # 复杂参数，四级缩进（与steps同级）
+          registry: registry.cn-shanghai.aliyuncs.com  # 镜像仓库地址，五级缩进
+          username: ${{ secrets.ALIYUN_USER }}          # 密钥引用，五级缩进
+          password: ${{ secrets.ALIYUN_PASS }}          # 密钥引用，五级缩进
+
+      - name: Pull and Push Image
+        run: |  # 多行命令，四级缩进（| 表示保留换行）
+          docker pull docker.io/library/nginx:latest  # 拉取镜像，五级缩进
+          docker tag docker.io/library/nginx:latest registry.cn-shanghai.aliyuncs.com/agent-zero-0/nginx:latest  # 打标签，五级缩进
+          docker push registry.cn-shanghai.aliyuncs.com/agent-zero-0/nginx:latest  # 推送镜像，五级缩进
