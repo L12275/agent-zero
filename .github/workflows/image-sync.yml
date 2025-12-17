@@ -20,6 +20,7 @@ jobs:                    # 任务定义，一级缩进
 
       - name: Pull and Push Image
         run: |  # 多行命令，四级缩进（| 表示保留换行）
+          docker login --username=a1227515388 crpi-w0vx2721eg479dql.cn-hangzhou.personal.cr.aliyuncs.com
           docker pull docker.io/library/nginx:latest  # 拉取镜像，五级缩进
-          docker tag docker.io/library/nginx:latest registry.crpi-w0vx2721eg479dql.cn-hangzhou.personal.cr.aliyuncs.com/doos/agent-zero-0:latest # 打标签，五级缩进
-          docker push registry.crpi-w0vx2721eg479dql.cn-hangzhou.personal.cr.aliyuncs.com/doos/agent-zero-0:latest  # 推送镜像，五级缩进
+          docker tag docker.io/library/nginx:latest crpi-w0vx2721eg479dql.cn-hangzhou.personal.cr.aliyuncs.com/doos/agent-zero-0:latest  # 打标签，五级缩进
+          docker push crpi-w0vx2721eg479dql.cn-hangzhou.personal.cr.aliyuncs.com/doos/agent-zero-0:latest  # 推送镜像，五级缩进
