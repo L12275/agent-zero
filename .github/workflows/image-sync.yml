@@ -1,21 +1,10 @@
-  name: Sync Docker Image
-  on:
-  push:
-  branches: [main]
-  jobs:
-  sync:
-  runs-on: ubuntu-latest
-  steps:
-- name: Checkout code
-  uses: actions/checkout@v4
-- name: Login to Aliyun
-uses: docker/login-action@v2
-with:
-registry: registry.cn-shanghai.aliyuncs.com
-username: ${{ secrets.ALIYUN_USER }}
-password: ${{ secrets.ALIYUN_PASS }}
-- name: Pull and Push Image
-run: |
-docker pull docker.io/library/nginx:latest
-docker tag docker.io/library/nginx:latest registry.cn-shanghai.aliyuncs.com/agent-zero-0/nginx:latest
-docker push registry.cn-shanghai.aliyuncs.com/agent-zero-0/nginx:latest
+name: Test Workflow
+on:
+push:
+branches: [main]
+jobs:
+test:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout
+uses: actions/checkout@v4
